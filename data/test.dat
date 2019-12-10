@@ -1,0 +1,11 @@
+NAME: lamia
+STR: 40
+STAM: 45
+SKL: 37
+GLYPH: l
+
+NAME: dragon
+STR: 95
+STAM: 22
+SPD: 36
+GLYPH: d
