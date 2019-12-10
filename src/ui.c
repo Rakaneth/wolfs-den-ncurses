@@ -30,6 +30,8 @@ void gameLoop() {
             case STATE_INVENTORY:
                 CUR_STATE = handleInv(ch);
                 break;
+            default:
+                break;
         }
 
     } while (CUR_STATE != STATE_QUIT);
@@ -37,6 +39,8 @@ void gameLoop() {
 
 GameState handleMain(int ch) {
     GameState result = STATE_MAIN;
+    Point pp = {3, 5};
+    Point pc = {4, 5};
     char buf[50];
 
     switch(ch) {
@@ -48,6 +52,8 @@ GameState handleMain(int ch) {
             result = STATE_INVENTORY;
             break;
         default:
+            printAtPt(pp, "Here is some pointed text");
+            charAtPt(pc, '@');
             sprintf(buf, "Key was pressed in main: %d", ch);
             printAt(0, 0, buf);
     }
@@ -75,5 +81,13 @@ void printAt(int x, int y, const char* template) {
 
 void charAt(int x, int y, const char ch) {
     mvaddch(y, x, ch);
+}
+
+void printAtPt(Point pt, const char* text) {
+    printAt(pt.x, pt.y, text);
+}
+
+void charAtPt(Point pt, const char ch) {
+    charAt(pt.x, pt.y, ch);
 }
 
