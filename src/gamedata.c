@@ -26,7 +26,7 @@ int getCreatureData(FILE* f) {
     CreatureTemplate cur;
     int i = 0;
     char buf[50];
-    char stat[4];
+    char stat[5];
     int value;
     char glyph;
     char name[20];
@@ -44,21 +44,21 @@ int getCreatureData(FILE* f) {
     cur.glyph = '\0';
 
     while(fgets(buf, 50, f) != NULL) {
-        statCheck = sscanf(buf, "%s: %d", stat, &value);
-        charCheck = sscanf(buf, "%s: %c", stat, &glyph);
-        nameCheck = sscanf(buf, "%s: %s", stat, name);
+        statCheck = sscanf(buf, "%[^: ]s%*[: ]%d", stat, &value);
+        charCheck = sscanf(buf, "%[^: ]s%*[: ]%c", stat, &glyph);
+        nameCheck = sscanf(buf, "%[^: ]s%*[: ]%s", stat, name);
 
-        if (statCheck == 2) {
+        if (nameCheck == 2 && strcmp(stat, "NAME") == 0) {
+            strcpy(cur.name, name);
+        } else if (charCheck == 2 && strcmp(stat, "GLYPH") == 0) {
+            cur.glyph = glyph;
+        } else if (statCheck == 2) {
             if (strcmp(stat, "STR") == 0) cur.str = value;
             if (strcmp(stat, "STAM") == 0) cur.stam = value;
             if (strcmp(stat, "SPD") == 0) cur.spd = value;
             if (strcmp(stat, "SKL") == 0) cur.skl = value;
             if (strcmp(stat, "SAG") == 0) cur.sag = value;
             if (strcmp(stat, "SMT") == 0) cur.smt = value;
-        } else if (charCheck == 2) {
-            cur.glyph = glyph;
-        } else if (nameCheck == 2) {
-            strcpy(cur.name, name);
         } else {
             C_TEMPLATES[i] = cur;
             cur.str = 10;
