@@ -1,5 +1,6 @@
 #include "ui.h"
 #include <ncurses.h>
+#include <stdarg.h>
 
 static GameState CUR_STATE = STATE_MAIN;
 
@@ -36,30 +37,43 @@ void gameLoop() {
 
 GameState handleMain(int ch) {
     GameState result = STATE_MAIN;
+    char buf[50];
 
     switch(ch) {
         case 'Q':
             result = STATE_QUIT;
             break;
         case 'i':
-            mvprintw(0, 0, "Entered inventory");
+            printAt(0, 0, "Entered inventory");
             result = STATE_INVENTORY;
             break;
         default:
-            mvprintw(0, 0, "Key was pressed in main: %d", ch);
+            sprintf(buf, "Key was pressed in main: %d", ch);
+            printAt(0, 0, buf);
     }
     return result;
 }
 
 GameState handleInv(int ch) {
     GameState result = STATE_INVENTORY;
+    char buf[50];
     switch(ch) {
         case 'Q':
-            mvprintw(0, 0, "Returned to main");
+            printAt(0, 0, "Returned to main");
             result = STATE_MAIN;
             break;
         default:
-            mvprintw(0, 0, "Key was pressed in inv: %d", ch);
+            sprintf(buf, "Key was pressed in inv: %d", ch);
+            printAt(0, 0, buf);
     }
     return result;
 }
+
+void printAt(int x, int y, const char* template) {
+    mvprintw(y, x, template);
+}
+
+void charAt(int x, int y, const char ch) {
+    mvaddch(y, x, ch);
+}
+
