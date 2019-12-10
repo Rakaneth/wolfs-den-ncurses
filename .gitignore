@@ -1,0 +1,8 @@
+#VSCode
+.vscode/
+
+#Build artifacts
+*.out
+
+#Log files
+*.log
