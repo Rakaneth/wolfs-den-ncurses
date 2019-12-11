@@ -1,11 +1,12 @@
-NAME: lamia
+{lamia: l}
 STR: 40
 STAM: 45
 SKL: 37
-GLYPH: l
+SPD: 38
+SMT: 99
+SAG: 45
 
-NAME: dragon
+{dragon: d}
 STR: 95
-STAM: 22
+STAM: 100
 SPD: 36
-GLYPH: d
