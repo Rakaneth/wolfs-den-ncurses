@@ -19,7 +19,7 @@ int readData(const char* fileName, DataType dType) {
             break;
     }
 
-    fclose(fileName);
+    fclose(datafile);
     return result;
 }
 
