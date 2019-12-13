@@ -60,9 +60,14 @@ GameState handleMain(int ch) {
         case 'Q':
             result = STATE_QUIT;
             break;
+        case 'H':
+            //sprintf(buf, "Lamia hashed: %d", hash("lamia"));
+            //printAt(msgWin, 1, 1, buf);
+            //touchwin(msgWin);
         default:
             sprintf(buf, "Key was pressed in main: %d", ch);
-            printAt(msgWin, 0, 0, buf);
+            printAt(msgWin, 1, 2, buf);
+            touchwin(msgWin);
     }
     return result;
 }
